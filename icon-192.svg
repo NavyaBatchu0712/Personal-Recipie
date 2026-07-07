@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <defs>
+    <linearGradient id="page" x1="28" y1="12" x2="166" y2="174" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fffaf6"/>
+      <stop offset=".48" stop-color="#ffd4d9"/>
+      <stop offset="1" stop-color="#ff8fb4"/>
+    </linearGradient>
+    <linearGradient id="bowl" x1="70" y1="101" x2="144" y2="157" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffe66d"/>
+      <stop offset="1" stop-color="#ff9a3d"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#171124" flood-opacity=".24"/>
+    </filter>
+  </defs>
+  <rect width="192" height="192" rx="38" fill="#171124"/>
+  <rect x="38" y="8" width="138" height="176" rx="18" fill="url(#page)" filter="url(#shadow)"/>
+  <path d="M46 44c-23 0-23-33 0-33h22" fill="none" stroke="#8cff63" stroke-width="12" stroke-linecap="round"/>
+  <path d="M46 76c-23 0-23-33 0-33h22" fill="none" stroke="#8cff63" stroke-width="12" stroke-linecap="round"/>
+  <path d="M46 108c-23 0-23-33 0-33h22" fill="none" stroke="#8cff63" stroke-width="12" stroke-linecap="round"/>
+  <path d="M46 140c-23 0-23-33 0-33h22" fill="none" stroke="#8cff63" stroke-width="12" stroke-linecap="round"/>
+  <text x="79" y="62" font-family="Arial Black, Impact, sans-serif" font-size="24" fill="#ff3d9a">RECIPE</text>
+  <path d="M76 108h76v11c0 24-16 39-38 39s-38-15-38-39z" fill="url(#bowl)"/>
+  <path d="M72 103h84v13c-9 4-14-5-22-1-7 4-13 4-20 0-8-4-13 5-22 1-8-4-12 1-20-2z" fill="#ffe66d"/>
+  <path d="M109 99c-14-9-13-29 0-35 12 8 12 27 0 35z" fill="#70687f"/>
+  <path d="M107 67c-4 12-4 20 0 30M115 68c4 11 4 20 0 29" fill="none" stroke="#ffd4d9" stroke-width="3" stroke-linecap="round"/>
+  <path d="M126 95V63c0-7 17-7 17 0v32" fill="#c86650"/>
+  <path d="M145 92V67h26v25c0 9-26 9-26 0z" fill="#53b7ff"/>
+  <path d="M153 72v14M160 72v14M167 72v14" stroke="#ffd4d9" stroke-width="4" stroke-linecap="round"/>
+  <path d="M80 168h36M126 168h25M80 178h61" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+</svg>

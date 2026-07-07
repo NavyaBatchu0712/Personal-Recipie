@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ff5f6d" />
+    <title>Fancy Recipe Studio</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icon-192.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-frame">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <p class="eyebrow">Recipe studio</p>
+          <h1 id="siteTitle">My Recipes</h1>
+        </div>
+
+        <nav class="side-menu" aria-label="Main menu">
+          <button class="nav-btn active" type="button" data-view="recipes">Recipes</button>
+          <button class="nav-btn" type="button" data-view="profile">Profile</button>
+          <button class="nav-btn" id="addRecipeBtn" type="button">Add Recipe</button>
+          <button class="nav-btn" id="editRecipeBtn" type="button">Edit Recipe</button>
+          <button class="nav-btn danger-text" id="deleteRecipeBtn" type="button">Delete Recipe</button>
+          <button class="nav-btn" type="button" data-view="questions">Ask Question</button>
+        </nav>
+
+        <div class="sidebar-tools">
+          <button class="mini-btn install-glow" id="installBtn" type="button">Install App</button>
+          <button class="mini-btn" id="exportBtn" type="button">Export Recipes</button>
+          <button class="mini-btn" id="importBtn" type="button">Import Recipes</button>
+          <input id="importInput" type="file" accept="application/json" hidden />
+        </div>
+      </aside>
+
+      <main class="main-stage">
+        <section class="hero-strip">
+          <div>
+            <p class="eyebrow">Your personal cookbook</p>
+            <h2 class="page-title">Recipes</h2>
+          </div>
+          <div class="search-tools">
+            <input id="searchInput" type="search" placeholder="Search recipe, tag, ingredient..." />
+            <select id="categoryFilter" aria-label="Filter by category">
+              <option value="all">All categories</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="recipe-board" id="recipeBoard" aria-live="polite"></section>
+
+        <section class="detail-panel" id="detailPanel" aria-live="polite"></section>
+      </main>
+    </div>
+
+    <dialog id="recipeDialog">
+      <form id="recipeForm" method="dialog">
+        <div class="dialog-header">
+          <div>
+            <p class="eyebrow">Recipe editor</p>
+            <h2 id="formTitle">Add Recipe</h2>
+          </div>
+          <button class="icon-btn" id="closeDialogBtn" type="button" aria-label="Close">x</button>
+        </div>
+
+        <input type="hidden" id="recipeId" />
+
+        <label>
+          Recipe title
+          <input id="titleInput" required maxlength="80" placeholder="Example: Mango cupcake magic" />
+        </label>
+
+        <div class="two-columns">
+          <label>
+            Category
+            <input id="categoryInput" required maxlength="40" placeholder="Breakfast, snacks, dinner..." />
+          </label>
+          <label>
+            Time
+            <input id="timeInput" maxlength="30" placeholder="30 minutes" />
+          </label>
+        </div>
+
+        <div class="two-columns">
+          <label>
+            Difficulty
+            <select id="difficultyInput">
+              <option>Easy</option>
+              <option>Medium</option>
+              <option>Challenge</option>
+            </select>
+          </label>
+          <label>
+            Kid-friendly rating
+            <select id="kidRatingInput">
+              <option>Super kid-friendly</option>
+              <option>Good for teens</option>
+              <option>Needs adult help</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          YouTube or cooking video link
+          <input id="videoInput" type="url" maxlength="300" placeholder="https://youtube.com/..." />
+        </label>
+
+        <label>
+          Tags
+          <input id="tagsInput" maxlength="120" placeholder="sweet, lunchbox, quick, spicy" />
+        </label>
+
+        <label>
+          Food photo
+          <input id="imageInput" type="file" accept="image/*" capture="environment" />
+        </label>
+        <img class="image-preview" id="imagePreview" alt="" hidden />
+
+        <label>
+          Ingredients
+          <textarea id="ingredientsInput" required rows="6" placeholder="Write one ingredient per line"></textarea>
+        </label>
+
+        <label>
+          Steps
+          <textarea id="stepsInput" required rows="7" placeholder="Write one step per line"></textarea>
+        </label>
+
+        <label>
+          Notes
+          <textarea id="notesInput" rows="3" placeholder="Any tips, swaps, or serving ideas"></textarea>
+        </label>
+
+        <div class="dialog-actions">
+          <button class="secondary-btn" id="cancelBtn" type="button">Cancel</button>
+          <button class="primary-btn" type="submit">Save Recipe</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="profileDialog">
+      <form id="profileForm" method="dialog">
+        <div class="dialog-header">
+          <div>
+            <p class="eyebrow">Profile</p>
+            <h2>Edit Website Title</h2>
+          </div>
+          <button class="icon-btn" id="closeProfileBtn" type="button" aria-label="Close">x</button>
+        </div>
+        <label>
+          Website title
+          <input id="profileTitleInput" maxlength="60" required />
+        </label>
+        <label>
+          Email for questions
+          <input id="ownerEmailInput" type="email" maxlength="120" placeholder="your-email@example.com" />
+        </label>
+        <div class="dialog-actions">
+          <button class="secondary-btn" id="cancelProfileBtn" type="button">Cancel</button>
+          <button class="primary-btn" type="submit">Save Profile</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="questionDialog">
+      <form id="questionForm" method="dialog">
+        <div class="dialog-header">
+          <div>
+            <p class="eyebrow">Ask the chef</p>
+            <h2>Question Box</h2>
+          </div>
+          <button class="icon-btn" id="closeQuestionBtn" type="button" aria-label="Close">x</button>
+        </div>
+        <label>
+          Your name
+          <input id="questionNameInput" maxlength="60" required placeholder="Who is asking?" />
+        </label>
+        <label>
+          Question
+          <textarea id="questionTextInput" rows="5" required placeholder="Ask about ingredients, timing, swaps, or cooking tips"></textarea>
+        </label>
+        <div class="dialog-actions">
+          <button class="secondary-btn" id="cancelQuestionBtn" type="button">Cancel</button>
+          <button class="primary-btn" type="submit">Save Question</button>
+        </div>
+        <div class="question-list" id="questionList"></div>
+      </form>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
