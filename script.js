@@ -27,6 +27,8 @@ const questionDialog = document.querySelector("#questionDialog");
 const questionForm = document.querySelector("#questionForm");
 const questionList = document.querySelector("#questionList");
 const installBtn = document.querySelector("#installBtn");
+const installDialog = document.querySelector("#installDialog");
+const shareLinkInput = document.querySelector("#shareLinkInput");
 
 document.querySelector("#addRecipeBtn").addEventListener("click", () => openRecipeForm());
 document.querySelector("#editRecipeBtn").addEventListener("click", editSelectedRecipe);
@@ -39,6 +41,8 @@ document.querySelector("#closeProfileBtn").addEventListener("click", () => profi
 document.querySelector("#cancelProfileBtn").addEventListener("click", () => profileDialog.close());
 document.querySelector("#closeQuestionBtn").addEventListener("click", () => questionDialog.close());
 document.querySelector("#cancelQuestionBtn").addEventListener("click", () => questionDialog.close());
+document.querySelector("#closeInstallBtn").addEventListener("click", () => installDialog.close());
+document.querySelector("#copyLinkBtn").addEventListener("click", copyShareLink);
 
 document.querySelectorAll("[data-view]").forEach((button) => {
   button.addEventListener("click", () => {
@@ -66,7 +70,7 @@ installBtn.addEventListener("click", installApp);
 window.addEventListener("beforeinstallprompt", (event) => {
   event.preventDefault();
   deferredInstallPrompt = event;
-  installBtn.hidden = false;
+  installBtn.textContent = "Install App";
 });
 
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
@@ -491,13 +495,28 @@ function importRecipes() {
 
 async function installApp() {
   if (!deferredInstallPrompt) {
-    alert("To install this app on iPhone: open this link in Safari, tap the Share button, then tap Add to Home Screen. If you are inside WhatsApp, tap the browser/menu option and choose Open in Safari first. On Android: open in Chrome, tap the three-dot menu, then tap Install app or Add to Home screen.");
+    installDialog.showModal();
     return;
   }
   deferredInstallPrompt.prompt();
   await deferredInstallPrompt.userChoice;
   deferredInstallPrompt = null;
-  installBtn.hidden = true;
+  installBtn.textContent = "Install Help";
+}
+
+async function copyShareLink() {
+  shareLinkInput.select();
+  shareLinkInput.setSelectionRange(0, 99999);
+
+  try {
+    await navigator.clipboard.writeText(shareLinkInput.value);
+    document.querySelector("#copyLinkBtn").textContent = "Copied";
+    setTimeout(() => {
+      document.querySelector("#copyLinkBtn").textContent = "Copy Link";
+    }, 1200);
+  } catch {
+    document.execCommand("copy");
+  }
 }
 
 function setActiveNav(view) {

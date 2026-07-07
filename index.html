@@ -4,10 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ff5f6d" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="My Recipes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <title>Fancy Recipe Studio</title>
-    <link rel="manifest" href="manifest.json" />
+    <link rel="manifest" href="manifest.json?v=5" />
     <link rel="apple-touch-icon" href="icon-192.svg" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=5" />
   </head>
   <body>
     <div class="app-frame">
@@ -27,7 +30,7 @@
         </nav>
 
         <div class="sidebar-tools">
-          <button class="mini-btn install-glow" id="installBtn" type="button">Install App</button>
+          <button class="mini-btn install-glow" id="installBtn" type="button">Install Help</button>
           <button class="mini-btn" id="exportBtn" type="button">Export Recipes</button>
           <button class="mini-btn" id="importBtn" type="button">Import Recipes</button>
           <input id="importInput" type="file" accept="application/json" hidden />
@@ -188,6 +191,48 @@
       </form>
     </dialog>
 
-    <script src="script.js"></script>
+    <dialog id="installDialog">
+      <div class="install-panel">
+        <div class="dialog-header">
+          <div>
+            <p class="eyebrow">Add to phone</p>
+            <h2>Install My Recipes</h2>
+          </div>
+          <button class="icon-btn" id="closeInstallBtn" type="button" aria-label="Close">x</button>
+        </div>
+
+        <div class="install-steps">
+          <section>
+            <h3>iPhone</h3>
+            <ol>
+              <li>Open this site in Safari, not WhatsApp, Instagram, or Gmail.</li>
+              <li>Tap the Share button at the bottom of Safari.</li>
+              <li>Tap Add to Home Screen.</li>
+              <li>Tap Add.</li>
+            </ol>
+          </section>
+
+          <section>
+            <h3>Android</h3>
+            <ol>
+              <li>Open this site in Chrome.</li>
+              <li>Tap the three-dot menu.</li>
+              <li>Tap Install app or Add to Home screen.</li>
+            </ol>
+          </section>
+        </div>
+
+        <label>
+          Share this public app link
+          <input id="shareLinkInput" readonly value="https://navyabatchu0712.github.io/Personal-Recipie/" />
+        </label>
+        <div class="dialog-actions">
+          <button class="secondary-btn" id="copyLinkBtn" type="button">Copy Link</button>
+          <a class="primary-link-btn" href="https://navyabatchu0712.github.io/Personal-Recipie/" target="_blank" rel="noopener">Open Site</a>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="script.js?v=5"></script>
   </body>
 </html>
