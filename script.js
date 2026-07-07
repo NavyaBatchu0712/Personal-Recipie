@@ -8,7 +8,6 @@ let profile = loadProfile();
 let selectedId = "";
 let currentPage = 1;
 const RECIPES_PER_PAGE = 8;
-let deferredInstallPrompt = null;
 
 const siteTitle = document.querySelector("#siteTitle");
 const recipeBoard = document.querySelector("#recipeBoard");
@@ -69,8 +68,6 @@ installBtn.addEventListener("click", installApp);
 
 window.addEventListener("beforeinstallprompt", (event) => {
   event.preventDefault();
-  deferredInstallPrompt = event;
-  installBtn.textContent = "Install App";
 });
 
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
@@ -493,15 +490,8 @@ function importRecipes() {
   reader.readAsText(file);
 }
 
-async function installApp() {
-  if (!deferredInstallPrompt) {
-    installDialog.showModal();
-    return;
-  }
-  deferredInstallPrompt.prompt();
-  await deferredInstallPrompt.userChoice;
-  deferredInstallPrompt = null;
-  installBtn.textContent = "Install Help";
+function installApp() {
+  installDialog.showModal();
 }
 
 async function copyShareLink() {
