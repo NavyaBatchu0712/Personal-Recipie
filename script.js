@@ -491,7 +491,7 @@ function importRecipes() {
 
 async function installApp() {
   if (!deferredInstallPrompt) {
-    alert("To install this like an app, open the website from http://127.0.0.1:4173/index.html on this computer, or host it online with HTTPS and use Add to Home Screen on your phone.");
+    alert("To install this app on iPhone: open this link in Safari, tap the Share button, then tap Add to Home Screen. If you are inside WhatsApp, tap the browser/menu option and choose Open in Safari first. On Android: open in Chrome, tap the three-dot menu, then tap Install app or Add to Home screen.");
     return;
   }
   deferredInstallPrompt.prompt();

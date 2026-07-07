@@ -1,4 +1,4 @@
-const CACHE_NAME = "fancy-recipe-studio-v3";
+const CACHE_NAME = "fancy-recipe-studio-v4";
 const APP_FILES = [
   "./",
   "./index.html",
